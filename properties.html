@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Properties — Drakca</title>
+  <meta name="description" content="Properties from DL Management across Maryland, Virginia, and Washington, D.C.">
+  <meta name="theme-color" content="#142028">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700&family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css?v=5">
+</head>
+<body data-page="properties">
+  <a class="skip" href="#main">Skip to content</a>
+  <header class="site-header" id="header">
+    <div class="wrap header-inner">
+      <a class="brand" href="index.html"><span class="brand-mark" aria-hidden="true">D</span><span class="brand-type"><span class="brand-name">Drakca</span><span class="brand-sub">DL Management</span></span></a>
+      <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="nav-panel">Menu</button>
+      <nav class="nav-panel" id="nav-panel" aria-label="Primary">
+        <a href="properties.html" data-nav="properties">Properties</a>
+        <a href="services.html" data-nav="services">Services</a>
+        <a href="residents.html" data-nav="residents">Residents</a>
+        <a href="owners.html" data-nav="owners">Owners</a>
+        <a href="about.html" data-nav="about">About</a>
+        <a href="contact.html" data-nav="contact">Contact</a>
+        <a class="btn nav-inquire" href="contact.html">Inquire</a>
+      </nav>
+    </div>
+  </header>
+  <main id="main">
+    <section class="page-hero">
+      <img class="hero-media" src="images/wisconsin.jpg" alt="">
+      <div class="hero-shade" aria-hidden="true"></div>
+      <div class="wrap">
+        <p class="eyebrow">Portfolio</p>
+        <h1>Properties.</h1>
+        <p class="lede">Select a property for the full details and an application. The office covers Maryland, Virginia, and Washington, D.C.</p>
+      </div>
+      <a class="scroll-cue" href="#page">
+        <span>Scroll</span>
+        <span class="scroll-line" aria-hidden="true"></span>
+      </a>
+    </section>
+    <section class="section" id="page">
+      <div class="wrap">
+        <form class="finder finder-page" action="properties.html#page" method="get">
+          <label>
+            <span>Looking for</span>
+            <select name="intent">
+              <option value="">All</option>
+              <option value="rent">For rent</option>
+              <option value="sale">For sale</option>
+            </select>
+          </label>
+          <label>
+            <span>Use</span>
+            <select name="type">
+              <option value="">All</option>
+              <option value="Residential">Residential</option>
+              <option value="Commercial">Commercial</option>
+              <option value="Mixed-use">Mixed-use</option>
+              <option value="Office">Office</option>
+              <option value="Retail">Retail</option>
+            </select>
+          </label>
+          <label>
+            <span>Market</span>
+            <select name="state">
+              <option value="">All markets</option>
+              <option value="Maryland">Maryland</option>
+              <option value="Virginia">Virginia</option>
+              <option value="Washington, D.C.">Washington, D.C.</option>
+            </select>
+          </label>
+          <label class="finder-query">
+            <span>Search</span>
+            <input type="search" name="q" placeholder="Neighborhood or street" autocomplete="off">
+          </label>
+          <button class="finder-go" type="submit">
+            <span>View properties</span>
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+        </form>
+        <div id="filters" class="filter-bar"></div>
+        <p id="result-count" class="result-count" aria-live="polite"></p>
+        <div id="book" class="shop"></div>
+        <div id="empty" class="empty" hidden>
+          <p>Nothing in the portfolio matches.</p>
+          <button type="button" id="clear-filters">Clear filters</button>
+        </div>
+      </div>
+    </section>
+  </main>
+  <footer class="site-footer">
+    <div class="wrap foot-grid">
+      <div><p class="brand-name">Drakca</p><p>The public name for DL Management, a brokerage based in Bethesda, Maryland.</p></div>
+      <div><p class="foot-label">Portfolio</p><a href="properties.html?state=Washington%2C%20D.C.">Washington, D.C.</a><a href="properties.html?state=Maryland">Maryland</a><a href="properties.html?state=Virginia">Virginia</a><a href="properties.html?open=1">Open now</a></div>
+      <div><p class="foot-label">Company</p><a href="services.html">Services</a><a href="residents.html">Residents</a><a href="owners.html">Owners</a><a href="about.html">About</a><a href="contact.html">Contact</a></div>
+      <div><p class="foot-label">Offices</p><p>Bethesda, Maryland</p><p>By appointment</p></div>
+    </div>
+    <div class="wrap legal"><span>Equal Housing Opportunity</span><span>© <span id="year">2026</span> Drakca</span></div>
+  </footer>
+  <script src="js/data.js"></script>
+  <script src="js/site.js"></script>
+</body>
+</html>

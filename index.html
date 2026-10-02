@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Drakca — DL Management</title>
+  <meta name="description" content="Drakca is the name used by DL Management, a Bethesda brokerage working across Maryland, Virginia, and Washington, D.C.">
+  <meta name="theme-color" content="#142028">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700&family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css?v=5">
+</head>
+<body data-page="home">
+  <a class="skip" href="#main">Skip to content</a>
+  <header class="site-header" id="header">
+    <div class="wrap header-inner">
+      <a class="brand" href="index.html">
+        <span class="brand-mark" aria-hidden="true">D</span>
+        <span class="brand-type"><span class="brand-name">Drakca</span><span class="brand-sub">DL Management</span></span>
+      </a>
+      <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="nav-panel">Menu</button>
+      <nav class="nav-panel" id="nav-panel" aria-label="Primary">
+        <a href="properties.html" data-nav="properties">Properties</a>
+        <a href="services.html" data-nav="services">Services</a>
+        <a href="residents.html" data-nav="residents">Residents</a>
+        <a href="owners.html" data-nav="owners">Owners</a>
+        <a href="about.html" data-nav="about">About</a>
+        <a href="contact.html" data-nav="contact">Contact</a>
+        <a class="btn nav-inquire" href="contact.html">Inquire</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="hero">
+      <img class="hero-media" src="images/hero.jpg" alt="Brick townhouses with black shutters along a tree-lined street.">
+      <div class="hero-shade" aria-hidden="true"></div>
+      <div class="wrap hero-content">
+        <p class="eyebrow">Maryland · Virginia · Washington, D.C.</p>
+        <h1>Real estate brokerage for the capital region.</h1>
+        <p class="lede">Drakca is DL Management, a brokerage based in Bethesda.</p>
+        <p class="hero-actions"><a class="btn-text" href="owners.html">For owners</a></p>
+        <form class="finder" action="properties.html#page" method="get">
+          <label>
+            <span>Looking for</span>
+            <select name="intent">
+              <option value="">All</option>
+              <option value="rent">For rent</option>
+              <option value="sale">For sale</option>
+            </select>
+          </label>
+          <label>
+            <span>Use</span>
+            <select name="type">
+              <option value="">All</option>
+              <option value="Residential">Residential</option>
+              <option value="Commercial">Commercial</option>
+              <option value="Mixed-use">Mixed-use</option>
+              <option value="Office">Office</option>
+              <option value="Retail">Retail</option>
+            </select>
+          </label>
+          <label>
+            <span>Market</span>
+            <select name="state">
+              <option value="">All markets</option>
+              <option value="Maryland">Maryland</option>
+              <option value="Virginia">Virginia</option>
+              <option value="Washington, D.C.">Washington, D.C.</option>
+            </select>
+          </label>
+          <label class="finder-query">
+            <span>Search</span>
+            <input type="search" name="q" placeholder="Neighborhood or street" autocomplete="off">
+          </label>
+          <button class="finder-go" type="submit">
+            <span>View properties</span>
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+        </form>
+      </div>
+    </section>
+
+    <section class="section" id="markets">
+      <div class="wrap">
+        <div class="section-head">
+          <p class="eyebrow">Markets</p>
+          <h2>Maryland, Virginia, and the District.</h2>
+          <p class="lede">The office is in Bethesda. Representation runs across the capital region.</p>
+        </div>
+        <div class="markets" id="markets">
+          <a class="market" href="properties.html?state=Maryland#page">
+            <p class="kicker">Headquarters</p>
+            <h3>Maryland</h3>
+            <p>The office is in Bethesda, with work across the state.</p>
+            <span class="btn-text">View Maryland</span>
+          </a>
+          <a class="market" href="properties.html?state=Virginia#page">
+            <p class="kicker">Northern Virginia</p>
+            <h3>Virginia</h3>
+            <p>Buyer and seller representation in Northern Virginia.</p>
+            <span class="btn-text">View Virginia</span>
+          </a>
+          <a class="market" href="properties.html?state=Washington%2C%20D.C.#page">
+            <p class="kicker">The District</p>
+            <h3>Washington, D.C.</h3>
+            <p>Buyer and seller representation in the District.</p>
+            <span class="btn-text">View the District</span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <section class="property-tease" aria-label="Properties" hidden>
+      <div class="wrap">
+        <div class="bubbles" id="property-bubbles"></div>
+        <a class="see-properties" href="properties.html">
+          <span class="see-arrow" aria-hidden="true">
+            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3v9M4.5 8.5 8 12l3.5-3.5"/></svg>
+          </span>
+          See properties
+        </a>
+      </div>
+    </section>
+
+    <section class="section" id="practice">
+      <div class="wrap">
+        <div class="section-head-row">
+          <div>
+            <p class="eyebrow">Services</p>
+            <h2>How we work.</h2>
+            <p class="lede">Buyer and seller representation, investment property, and advisory for owners.</p>
+          </div>
+          <a class="btn" href="services.html">Full practice</a>
+        </div>
+        <div class="service-grid">
+          <article class="service-card"><p class="num">01</p><h3>Buyer representation</h3><p>Search, valuation, and negotiation for residential and investment purchases.</p></article>
+          <article class="service-card"><p class="num">02</p><h3>Seller representation</h3><p>Pricing, preparation, and marketing for owners bringing a property to market.</p></article>
+          <article class="service-card"><p class="num">03</p><h3>Investment property</h3><p>Acquisition and disposition of income property across the capital region.</p></article>
+          <article class="service-card"><p class="num">04</p><h3>Owner advisory</h3><p>Scope and fees are set for the property after a consultation.</p></article>
+          <article class="service-card"><p class="num">05</p><h3>Brokerage</h3><p>DL Management represents clients under the name Drakca.</p></article>
+          <article class="service-card"><p class="num">06</p><h3>Local practice</h3><p>Transactions are handled under the rules of Maryland, Virginia, and the District.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="band">
+      <img src="images/clarendon.jpg" alt="">
+      <div class="band-copy">
+        <p class="eyebrow">For owners</p>
+        <h2>Representation on both sides of the Potomac.</h2>
+        <p>Assignments begin with a consultation at the Bethesda office.</p>
+        <div class="hero-actions">
+          <a class="btn" href="owners.html">For owners</a>
+          <a class="btn-text" href="contact.html?topic=owner">Discuss a property</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="close">
+      <img src="images/wisconsin.jpg" alt="">
+      <div class="hero-shade" aria-hidden="true"></div>
+      <div class="wrap close-copy">
+        <p class="eyebrow">The office</p>
+        <h2>Write when you are ready.</h2>
+        <p>Buyers, sellers, owners, and residents. Name the property if you have one.</p>
+        <div class="hero-actions">
+          <a class="btn" href="contact.html">Inquire</a>
+          <a class="btn-text" href="about.html">About the firm</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap foot-grid">
+      <div>
+        <p class="brand-name">Drakca</p>
+        <p>The public name for DL Management, a brokerage based in Bethesda, Maryland.</p>
+      </div>
+      <div>
+        <p class="foot-label">Portfolio</p>
+        <a href="properties.html?state=Washington%2C%20D.C.">Washington, D.C.</a>
+        <a href="properties.html?state=Maryland">Maryland</a>
+        <a href="properties.html?state=Virginia">Virginia</a>
+      </div>
+      <div>
+        <p class="foot-label">Company</p>
+        <a href="services.html">Services</a>
+        <a href="residents.html">Residents</a>
+        <a href="owners.html">Owners</a>
+        <a href="about.html">About</a>
+        <a href="contact.html">Contact</a>
+      </div>
+      <div>
+        <p class="foot-label">Offices</p>
+        <p>Bethesda, Maryland</p>
+        <p>By appointment</p>
+      </div>
+    </div>
+    <div class="wrap legal">
+      <span class="eho">Equal Housing Opportunity</span>
+      <span>© <span id="year">2026</span> Drakca</span>
+    </div>
+  </footer>
+  <script src="js/data.js"></script>
+  <script src="js/site.js"></script>
+</body>
+</html>

@@ -1,6 +1,5 @@
 (function () {
   const properties = DRAKA.properties;
-  const stateOrder = ["Washington, D.C.", "Maryland", "Virginia"];
   const page = document.body.dataset.page || "";
 
   document.querySelectorAll("[data-phone]").forEach((el) => {
@@ -54,22 +53,6 @@
     window.addEventListener("scroll", onScroll, { passive: true });
   }
 
-  const markets = document.getElementById("markets");
-  if (markets && properties.length) {
-    markets.innerHTML = stateOrder.map((state) => {
-      const list = properties.filter((property) => property.state === state);
-      const places = [...new Set(list.map((property) => property.neighborhood))];
-      return (
-        '<article class="market">' +
-          "<p class=\"kicker\">" + esc(String(list.length)) + (list.length === 1 ? " property" : " properties") + "</p>" +
-          "<h3>" + esc(state) + "</h3>" +
-          "<ul>" + places.map((place) => "<li>" + esc(place) + "</li>").join("") + "</ul>" +
-          '<a href="properties.html?state=' + encodeURIComponent(state) + '#page">View ' + esc(state) + "</a>" +
-        "</article>"
-      );
-    }).join("");
-  }
-
   const tease = document.querySelector(".property-tease");
   const bubbles = document.getElementById("property-bubbles");
   if (bubbles) {
@@ -81,6 +64,15 @@
       bubbles.hidden = false;
       bubbles.innerHTML = preview.map(bubble).join("");
     }
+  }
+
+  const leaseList = document.getElementById("lease-list");
+  if (leaseList) {
+    const leases = properties.filter((property) => property.intent === "rent");
+    leaseList.hidden = leases.length === 0;
+    leaseList.innerHTML = leases.map(leaseCard).join("");
+    const leaseEmpty = document.getElementById("lease-empty");
+    if (leaseEmpty) leaseEmpty.hidden = leases.length !== 0;
   }
 
   const book = initBook();
@@ -106,11 +98,33 @@
     return lines.slice(0, 4);
   }
 
+  function markLetter(property) {
+    const name = String(property.name || "").trim();
+    const letter = name.match(/[A-Za-z]/);
+    return (letter ? letter[0] : name.charAt(0) || "·").toUpperCase();
+  }
+
+  function leaseCard(property) {
+    const place = [property.neighborhood, property.state].filter(Boolean).join(", ");
+    const note = [property.price, property.available ? "Available " + property.available : ""].filter(Boolean).join(" · ");
+    const kind = property.intent === "sale" ? "For sale" : "For lease";
+    return (
+      '<a class="card" href="property.html?id=' + esc(property.id) + '">' +
+        '<div class="card-body">' +
+          '<p class="kicker">' + esc(kind) + (property.type ? " · " + esc(property.type) : "") + "</p>" +
+          "<h3>" + esc(property.name) + "</h3>" +
+          (place ? '<p class="meta">' + esc(place) + "</p>" : "") +
+          (note ? '<p class="open-note">' + esc(note) + "</p>" : "") +
+        "</div>" +
+      "</a>"
+    );
+  }
+
   function bubble(property) {
     const facts = hoverFacts(property).map((line) => "<span>" + esc(line) + "</span>").join("");
     const face = property.image
       ? "<img src=\"" + esc(property.image) + "\" alt=\"\" style=\"object-position:" + esc(property.pos || "center") + "\">"
-      : "<span class=\"bubble-mark\" aria-hidden=\"true\">" + esc(String(property.name || "").slice(0, 1)) + "</span>";
+      : "<span class=\"bubble-mark\" aria-hidden=\"true\">" + esc(markLetter(property)) + "</span>";
     return (
       '<a class="bubble" href="property.html?id=' + esc(property.id) + '">' +
         '<span class="bubble-photo">' +
@@ -243,7 +257,7 @@
         if (state.state !== "All" && property.state !== state.state) return false;
         if (state.role !== "All" && property.role !== state.role) return false;
         if (!matchesUse(property, state.type)) return false;
-        if (state.open && !property.available) return false;
+        if (state.open && property.open !== true) return false;
         if (query) {
           const haystack = [property.name, property.neighborhood, property.state, property.street, property.type, property.scale, property.price, property.intent].join(" ").toLowerCase();
           if (!haystack.includes(query)) return false;
@@ -260,7 +274,7 @@
           count.textContent = search ? "Filtered to " + search + "." : "";
         }
       }
-      book.innerHTML = list.map(bubble).join("");
+      book.innerHTML = list.map(leaseCard).join("");
       book.hidden = list.length === 0;
       if (empty) {
         empty.hidden = list.length !== 0;
@@ -335,7 +349,7 @@
     const applyHref = property.applyHref || ("contact.html?property=" + encodeURIComponent(property.name) + "&topic=apply");
     const eyebrow = [property.state, property.neighborhood].filter(Boolean).join(" · ");
     root.innerHTML =
-      '<section class="page-hero">' +
+      '<section class="page-hero' + (property.image ? "" : " page-hero-plain") + '">' +
         (property.image
           ? '<img class="hero-media" src="' + esc(property.image) + '" alt="' + esc(property.alt || "") + '" style="object-position:' + esc(property.pos || "center") + '">'
           : "") +
@@ -365,7 +379,7 @@
               "<li>The office replies at the email you provide. Rent and terms are set in the lease.</li>" +
             "</ol>" +
             '<a class="btn btn-block" href="' + esc(applyHref) + '">Apply for this property</a>' +
-            '<p class="apply-note"><a href="properties.html">All properties</a></p>' +
+            '<p class="apply-note"><a href="contact.html?property=' + encodeURIComponent(property.name) + '&topic=tour">Request a tour</a> · <a href="properties.html">All properties</a></p>' +
           "</aside>" +
         "</div>" +
       "</div></section>";
@@ -382,6 +396,8 @@
       if (topic === "owner" && form.elements.who) form.elements.who.value = "An owner";
       if (topic === "resident" && form.elements.who) form.elements.who.value = "A resident";
       if (topic === "brokerage" && form.elements.who) form.elements.who.value = "Buying or selling";
+      if (topic === "estimate" && form.elements.who) form.elements.who.value = "Requesting an estimate";
+      if (topic === "tour" && form.elements.who) form.elements.who.value = "Scheduling a tour";
 
       form.addEventListener("submit", (event) => {
         event.preventDefault();
@@ -414,17 +430,27 @@
         const notes = JSON.parse(localStorage.getItem("dracka.notes") || "[]");
         notes.push(entry);
         localStorage.setItem("dracka.notes", JSON.stringify(notes));
+        const lines = [
+          "Name: " + entry.name,
+          "Email: " + entry.email,
+          "Phone: " + (entry.phone || "—"),
+          "I am: " + (entry.who || "—"),
+        ];
+        if (entry.place) lines.push("Kind of property: " + entry.place);
+        lines.push("About: " + (entry.subject || "—"), "", entry.message);
         const mail = new URLSearchParams({
           subject: "Drakca — " + (entry.who || "Inquiry") + (entry.subject ? " — " + entry.subject : ""),
-          body: ["Name: " + entry.name, "Email: " + entry.email, "Phone: " + (entry.phone || "—"), "I am: " + entry.who, "About: " + (entry.subject || "—"), "", entry.message].join("\n"),
+          body: lines.join("\n"),
         });
         const success = form.parentElement.querySelector(".form-success");
         const mailLink = success.querySelector("[data-mailto]");
-        if (mailLink && DRAKA.contact.emailHref) mailLink.href = DRAKA.contact.emailHref + "?" + mail.toString();
+        const href = DRAKA.contact.emailHref ? DRAKA.contact.emailHref + "?" + mail.toString() : "";
+        if (mailLink && href) mailLink.href = href;
         else if (mailLink) mailLink.remove();
         form.hidden = true;
         success.hidden = false;
         success.focus();
+        if (href) window.location.href = href;
       });
     });
   }

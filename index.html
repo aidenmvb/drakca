@@ -4,13 +4,13 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Drakca — DL Management</title>
-  <meta name="description" content="Drakca is the name used by DL Management, a Bethesda brokerage working across Maryland, Virginia, and Washington, D.C.">
+  <meta name="description" content="Drakca is the public name of DL Management. Vacancies for lease, and improvements and repairs, across Maryland, Virginia, and Washington, D.C.">
   <meta name="theme-color" content="#142028">
   <link rel="icon" href="favicon.svg" type="image/svg+xml">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700&family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/styles.css?v=5">
+  <link rel="stylesheet" href="css/styles.css?v=6">
 </head>
 <body data-page="home">
   <a class="skip" href="#main">Skip to content</a>
@@ -23,6 +23,7 @@
       <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="nav-panel">Menu</button>
       <nav class="nav-panel" id="nav-panel" aria-label="Primary">
         <a href="properties.html" data-nav="properties">Properties</a>
+        <a href="improvements.html" data-nav="improvements">Repairs</a>
         <a href="services.html" data-nav="services">Services</a>
         <a href="residents.html" data-nav="residents">Residents</a>
         <a href="owners.html" data-nav="owners">Owners</a>
@@ -39,9 +40,12 @@
       <div class="hero-shade" aria-hidden="true"></div>
       <div class="wrap hero-content">
         <p class="eyebrow">Maryland · Virginia · Washington, D.C.</p>
-        <h1>Real estate brokerage for the capital region.</h1>
-        <p class="lede">Drakca is DL Management, a brokerage based in Bethesda.</p>
-        <p class="hero-actions"><a class="btn-text" href="owners.html">For owners</a></p>
+        <h1>Space for lease, and the work on it.</h1>
+        <p class="lede">Drakca is the public name of DL Management, a brokerage in Bethesda. The office lists vacancies and arranges improvements and repairs.</p>
+        <p class="hero-actions">
+          <a class="btn" href="#lease">Available for lease</a>
+          <a class="btn-text" href="improvements.html#estimate">Request an estimate</a>
+        </p>
         <form class="finder" action="properties.html#page" method="get">
           <label>
             <span>Looking for</span>
@@ -83,14 +87,59 @@
       </div>
     </section>
 
+    <section class="section" id="lease">
+      <div class="wrap">
+        <div class="section-head-row">
+          <div>
+            <p class="eyebrow">Available for lease</p>
+            <h2>Confirmed vacancies.</h2>
+            <p class="lede">Homes, offices, and commercial space are listed on their own. A vacancy goes up when the office has confirmed the address, the rent, and the date. Photos are added when the office has them.</p>
+          </div>
+          <a class="btn" href="properties.html?intent=rent#page">All vacancies</a>
+        </div>
+        <div class="book" id="lease-list"></div>
+        <p id="lease-empty" class="empty" hidden>Nothing is listed for lease yet. Call the office to ask what is coming open.</p>
+      </div>
+    </section>
+
+    <section class="section" id="repairs">
+      <div class="wrap">
+        <div class="section-head-row">
+          <div>
+            <p class="eyebrow">Improvements and repairs</p>
+            <h2>Work on the building, quoted on its own.</h2>
+            <p class="lede">Homes, businesses, and repairs at rental properties. The estimate covers the work. Rent is paid only as rent, under the lease.</p>
+          </div>
+          <a class="btn" href="improvements.html#estimate">Request an estimate</a>
+        </div>
+        <div class="steps">
+          <article class="step">
+            <p class="num">Homes</p>
+            <h3>Residential</h3>
+            <p>Improvements and repairs for a house or apartment. Tell us the address and what needs doing.</p>
+          </article>
+          <article class="step">
+            <p class="num">Businesses</p>
+            <h3>Commercial</h3>
+            <p>The same for a shop, an office, or other commercial space. The quote follows a look at the work.</p>
+          </article>
+          <article class="step">
+            <p class="num">Rentals</p>
+            <h3>At a rental property</h3>
+            <p>Work performed at a property that is leased. The invoice is for that work. It is not a rent payment.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
     <section class="section" id="markets">
       <div class="wrap">
         <div class="section-head">
           <p class="eyebrow">Markets</p>
           <h2>Maryland, Virginia, and the District.</h2>
-          <p class="lede">The office is in Bethesda. Representation runs across the capital region.</p>
+          <p class="lede">The office is in Bethesda. Leasing and brokerage run across the capital region.</p>
         </div>
-        <div class="markets" id="markets">
+        <div class="markets">
           <a class="market" href="properties.html?state=Maryland#page">
             <p class="kicker">Headquarters</p>
             <h3>Maryland</h3>
@@ -100,28 +149,16 @@
           <a class="market" href="properties.html?state=Virginia#page">
             <p class="kicker">Northern Virginia</p>
             <h3>Virginia</h3>
-            <p>Buyer and seller representation in Northern Virginia.</p>
+            <p>Leasing and representation in Northern Virginia.</p>
             <span class="btn-text">View Virginia</span>
           </a>
           <a class="market" href="properties.html?state=Washington%2C%20D.C.#page">
             <p class="kicker">The District</p>
             <h3>Washington, D.C.</h3>
-            <p>Buyer and seller representation in the District.</p>
+            <p>Leasing and representation in the District.</p>
             <span class="btn-text">View the District</span>
           </a>
         </div>
-      </div>
-    </section>
-
-    <section class="property-tease" aria-label="Properties" hidden>
-      <div class="wrap">
-        <div class="bubbles" id="property-bubbles"></div>
-        <a class="see-properties" href="properties.html">
-          <span class="see-arrow" aria-hidden="true">
-            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3v9M4.5 8.5 8 12l3.5-3.5"/></svg>
-          </span>
-          See properties
-        </a>
       </div>
     </section>
 
@@ -129,9 +166,9 @@
       <div class="wrap">
         <div class="section-head-row">
           <div>
-            <p class="eyebrow">Services</p>
-            <h2>How we work.</h2>
-            <p class="lede">Buyer and seller representation, investment property, and advisory for owners.</p>
+            <p class="eyebrow">Brokerage</p>
+            <h2>Buying and selling, when that is the work.</h2>
+            <p class="lede">Representation for buyers, sellers, and owners still sits with the firm. Vacancies and repairs are listed above.</p>
           </div>
           <a class="btn" href="services.html">Full practice</a>
         </div>
@@ -164,12 +201,12 @@
       <div class="hero-shade" aria-hidden="true"></div>
       <div class="wrap close-copy">
         <p class="eyebrow">The office</p>
-        <h2>Write when you are ready.</h2>
-        <p>Buyers, sellers, owners, and residents. Name the property if you have one.</p>
-        <div class="hero-actions">
-          <a class="btn" href="contact.html">Inquire</a>
-          <a class="btn-text" href="about.html">About the firm</a>
-        </div>
+        <h2>Call or write.</h2>
+        <p>Vacancies, repairs, owners, and residents. Name the property if you have one.</p>
+        <p class="contact-line">
+          <a data-phone href=""></a>
+          <a data-email href=""></a>
+        </p>
       </div>
     </section>
   </main>
@@ -188,6 +225,8 @@
       </div>
       <div>
         <p class="foot-label">Company</p>
+        <a href="properties.html?intent=rent">For lease</a>
+        <a href="improvements.html">Repairs</a>
         <a href="services.html">Services</a>
         <a href="residents.html">Residents</a>
         <a href="owners.html">Owners</a>
@@ -198,6 +237,8 @@
         <p class="foot-label">Offices</p>
         <p>Bethesda, Maryland</p>
         <p>By appointment</p>
+        <p><a data-phone href=""></a></p>
+        <p><a data-email href=""></a></p>
       </div>
     </div>
     <div class="wrap legal">

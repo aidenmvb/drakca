@@ -259,7 +259,7 @@
         if (!matchesUse(property, state.type)) return false;
         if (state.open && property.open !== true) return false;
         if (query) {
-          const haystack = [property.name, property.neighborhood, property.state, property.street, property.type, property.scale, property.price, property.intent].join(" ").toLowerCase();
+          const haystack = [property.name, property.neighborhood, property.state, property.street, property.unit, property.type, property.scale, property.price, property.intent].join(" ").toLowerCase();
           if (!haystack.includes(query)) return false;
         }
         return true;
@@ -319,6 +319,7 @@
       ["Jurisdiction", property.state],
       ["Neighborhood", property.neighborhood],
       ["Address", property.street],
+      ["Unit", property.unit],
       ["Use", property.type],
       ["Price", property.price],
       ["Bedrooms", property.beds],

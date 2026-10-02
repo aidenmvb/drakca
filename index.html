@@ -10,7 +10,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700&family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/styles.css?v=6">
+  <link rel="stylesheet" href="css/styles.css?v=7">
 </head>
 <body data-page="home">
   <a class="skip" href="#main">Skip to content</a>
@@ -87,22 +87,25 @@
       </div>
     </section>
 
-    <section class="section" id="lease">
-      <div class="wrap">
-        <div class="section-head-row">
-          <div>
-            <p class="eyebrow">Available for lease</p>
-            <h2>Vacancies.</h2>
-            <p class="lede">Homes, offices, and commercial space from the office vacancy list. Rent is shown when the office has confirmed it. Photos are added when the office has them.</p>
-          </div>
-          <a class="btn" href="properties.html?intent=rent#page">All vacancies</a>
+    <section class="section home-lease" id="lease">
+      <div class="wrap property-tease">
+        <div class="section-head">
+          <p class="eyebrow">Available for lease</p>
+          <h2>Vacancies.</h2>
+          <p class="lede">Three from the office list. Rent is shown when the office has confirmed it.</p>
         </div>
-        <div class="book" id="lease-list"></div>
+        <div class="bubbles" id="lease-bubbles"></div>
         <p id="lease-empty" class="empty" hidden>Nothing is listed for lease yet. Call the office to ask what is coming open.</p>
+        <a class="see-properties" id="lease-all" href="properties.html?intent=rent#page">
+          <span>View all</span>
+          <span class="see-arrow" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </span>
+        </a>
       </div>
     </section>
 
-    <section class="section" id="repairs">
+    <section class="section home-repairs" id="repairs">
       <div class="wrap">
         <div class="section-head-row">
           <div>
@@ -132,7 +135,7 @@
       </div>
     </section>
 
-    <section class="section" id="markets">
+    <section class="section home-markets" id="markets">
       <div class="wrap">
         <div class="section-head">
           <p class="eyebrow">Markets</p>
@@ -162,7 +165,7 @@
       </div>
     </section>
 
-    <section class="section" id="practice">
+    <section class="section home-practice" id="practice">
       <div class="wrap">
         <div class="section-head-row">
           <div>

@@ -53,26 +53,15 @@
     window.addEventListener("scroll", onScroll, { passive: true });
   }
 
-  const tease = document.querySelector(".property-tease");
-  const bubbles = document.getElementById("property-bubbles");
-  if (bubbles) {
-    const preview = properties.slice(0, 4);
-    if (!preview.length) {
-      if (tease) tease.hidden = true;
-    } else {
-      if (tease) tease.hidden = false;
-      bubbles.hidden = false;
-      bubbles.innerHTML = preview.map(bubble).join("");
-    }
-  }
-
-  const leaseList = document.getElementById("lease-list");
-  if (leaseList) {
-    const leases = properties.filter((property) => property.intent === "rent");
-    leaseList.hidden = leases.length === 0;
-    leaseList.innerHTML = leases.map(leaseCard).join("");
+  const leaseBubbles = document.getElementById("lease-bubbles");
+  if (leaseBubbles) {
+    const preview = previewVacancies(properties);
+    const viewAll = document.getElementById("lease-all");
     const leaseEmpty = document.getElementById("lease-empty");
-    if (leaseEmpty) leaseEmpty.hidden = leases.length !== 0;
+    leaseBubbles.hidden = preview.length === 0;
+    leaseBubbles.innerHTML = preview.map(bubble).join("");
+    if (viewAll) viewAll.hidden = preview.length === 0;
+    if (leaseEmpty) leaseEmpty.hidden = preview.length !== 0;
   }
 
   const book = initBook();
@@ -98,10 +87,38 @@
     return lines.slice(0, 4);
   }
 
+  function previewVacancies(list) {
+    const leases = list.filter((property) => property.intent === "rent");
+    const picked = [];
+    const streets = new Set();
+    const take = (property) => {
+      if (!property || picked.includes(property) || streets.has(property.street) || picked.length >= 3) return;
+      streets.add(property.street);
+      picked.push(property);
+    };
+    const priced = leases.find((property) => property.price);
+    take(priced);
+    const commercial = leases
+      .filter((property) => property.type !== "Residential" && !streets.has(property.street))
+      .sort((a, b) => a.street.length - b.street.length)[0];
+    take(commercial);
+    const homeState = priced ? priced.state : "";
+    const elsewhere = leases
+      .filter((property) => property.state !== homeState && !streets.has(property.street))
+      .sort((a, b) => a.street.length - b.street.length)[0];
+    take(elsewhere);
+    leases.forEach(take);
+    return picked;
+  }
+
   function markLetter(property) {
-    const name = String(property.name || "").trim();
-    const letter = name.match(/[A-Za-z]/);
-    return (letter ? letter[0] : name.charAt(0) || "·").toUpperCase();
+    const source = String(property.street || property.name || "");
+    const skip = /^(street|st|avenue|ave|road|rd|way|boulevard|blvd|place|pl|northwest|northeast|drive|dr)$/i;
+    const word = source.split(/\s+/).find((part) => /^[A-Za-z]/.test(part) && !skip.test(part));
+    if (word) return word.charAt(0).toUpperCase();
+    const place = String(property.neighborhood || property.state || "");
+    const letter = place.match(/[A-Za-z]/);
+    return letter ? letter[0].toUpperCase() : "·";
   }
 
   function leaseCard(property) {
@@ -125,13 +142,19 @@
     const face = property.image
       ? "<img src=\"" + esc(property.image) + "\" alt=\"\" style=\"object-position:" + esc(property.pos || "center") + "\">"
       : "<span class=\"bubble-mark\" aria-hidden=\"true\">" + esc(markLetter(property)) + "</span>";
+    const label = property.street || property.name;
+    const place = [
+      property.type && property.type !== "Residential" ? property.type : "",
+      property.neighborhood || property.state,
+    ].filter(Boolean).join(" · ");
     return (
-      '<a class="bubble" href="property.html?id=' + esc(property.id) + '">' +
+      '<a class="bubble" href="property.html?id=' + esc(property.id) + '" title="' + esc(property.name) + '">' +
         '<span class="bubble-photo">' +
           face +
           '<span class="bubble-facts" aria-hidden="true">' + facts + "</span>" +
         "</span>" +
-        '<span class="bubble-name">' + esc(property.name) + "</span>" +
+        '<span class="bubble-name">' + esc(label) + "</span>" +
+        (place ? '<span class="bubble-place">' + esc(place) + "</span>" : "") +
       "</a>"
     );
   }

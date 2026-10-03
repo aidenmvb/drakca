@@ -53,13 +53,14 @@
     window.addEventListener("scroll", onScroll, { passive: true });
   }
 
-  const leaseBubbles = document.getElementById("lease-bubbles");
-  if (leaseBubbles) {
+  const leasePreview = document.getElementById("lease-preview");
+  if (leasePreview) {
     const preview = previewVacancies(properties);
+    const tones = ["ink", "brass", "deep"];
     const viewAll = document.getElementById("lease-all");
     const leaseEmpty = document.getElementById("lease-empty");
-    leaseBubbles.hidden = preview.length === 0;
-    leaseBubbles.innerHTML = preview.map(bubble).join("");
+    leasePreview.hidden = preview.length === 0;
+    leasePreview.innerHTML = preview.map((property, index) => previewCard(property, tones[index] || "ink")).join("");
     if (viewAll) viewAll.hidden = preview.length === 0;
     if (leaseEmpty) leaseEmpty.hidden = preview.length !== 0;
   }
@@ -133,6 +134,30 @@
           (place ? '<p class="meta">' + esc(place) + "</p>" : "") +
           (note ? '<p class="open-note">' + esc(note) + "</p>" : "") +
         "</div>" +
+      "</a>"
+    );
+  }
+
+  function previewCard(property, tone) {
+    const place = property.neighborhood || property.state || "For lease";
+    const region = property.neighborhood && property.state ? property.state : "";
+    const kicker = property.type && property.type !== "Residential" ? property.type : "For lease";
+    const blurb = property.price
+      ? "Offered at " + property.price + (property.available ? ", available " + property.available : "") + "."
+      : (property.unit ? property.unit + ". " : "") + "Available now. Ask the office for the rent.";
+    const arrow = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+    return (
+      '<a class="preview-card tone-' + esc(tone) + '" href="property.html?id=' + esc(property.id) + '">' +
+        '<span class="preview-face">' +
+          '<span class="preview-kicker">' + esc(kicker) + "</span>" +
+          '<span class="preview-mark">' + esc(place) + "</span>" +
+          (region ? '<span class="preview-where">' + esc(region) + "</span>" : "") +
+        "</span>" +
+        '<span class="preview-body">' +
+          '<span class="preview-title">' + esc(property.street || property.name) + "</span>" +
+          '<span class="preview-copy">' + esc(blurb) + "</span>" +
+          '<span class="preview-link">View property ' + arrow + "</span>" +
+        "</span>" +
       "</a>"
     );
   }

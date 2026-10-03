@@ -10,7 +10,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700&family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/styles.css?v=7">
+  <link rel="stylesheet" href="css/styles.css?v=8">
 </head>
 <body data-page="home">
   <a class="skip" href="#main">Skip to content</a>
@@ -88,20 +88,14 @@
     </section>
 
     <section class="section home-lease" id="lease">
-      <div class="wrap property-tease">
-        <div class="section-head">
+      <div class="wrap">
+        <div class="lease-intro">
           <p class="eyebrow">Available for lease</p>
-          <h2>Vacancies.</h2>
-          <p class="lede">Three from the office list. Rent is shown when the office has confirmed it.</p>
+          <p class="lease-note">Three from the office list. Rent is shown when the office has confirmed it.</p>
+          <a class="lease-all" id="lease-all" href="properties.html?intent=rent#page">View all <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
         </div>
-        <div class="bubbles" id="lease-bubbles"></div>
+        <div class="lease-row" id="lease-preview"></div>
         <p id="lease-empty" class="empty" hidden>Nothing is listed for lease yet. Call the office to ask what is coming open.</p>
-        <a class="see-properties" id="lease-all" href="properties.html?intent=rent#page">
-          <span>View all</span>
-          <span class="see-arrow" aria-hidden="true">
-            <svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          </span>
-        </a>
       </div>
     </section>
 

@@ -56,11 +56,10 @@
   const leasePreview = document.getElementById("lease-preview");
   if (leasePreview) {
     const preview = previewVacancies(properties);
-    const tones = ["ink", "brass", "deep"];
     const viewAll = document.getElementById("lease-all");
     const leaseEmpty = document.getElementById("lease-empty");
     leasePreview.hidden = preview.length === 0;
-    leasePreview.innerHTML = preview.map((property, index) => previewCard(property, tones[index] || "ink")).join("");
+    leasePreview.innerHTML = preview.map((property) => previewCard(property)).join("");
     if (viewAll) viewAll.hidden = preview.length === 0;
     if (leaseEmpty) leaseEmpty.hidden = preview.length !== 0;
   }
@@ -138,7 +137,7 @@
     );
   }
 
-  function previewCard(property, tone) {
+  function previewCard(property) {
     const place = property.neighborhood || property.state || "For lease";
     const region = property.neighborhood && property.state ? property.state : "";
     const kicker = property.type && property.type !== "Residential" ? property.type : "For lease";
@@ -147,7 +146,7 @@
       : (property.unit ? property.unit + ". " : "") + "Available now. Ask the office for the rent.";
     const arrow = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>';
     return (
-      '<a class="preview-card tone-' + esc(tone) + '" href="property.html?id=' + esc(property.id) + '">' +
+      '<a class="preview-card" href="property.html?id=' + esc(property.id) + '">' +
         '<span class="preview-face">' +
           '<span class="preview-kicker">' + esc(kicker) + "</span>" +
           '<span class="preview-mark">' + esc(place) + "</span>" +
@@ -156,7 +155,7 @@
         '<span class="preview-body">' +
           '<span class="preview-title">' + esc(property.street || property.name) + "</span>" +
           '<span class="preview-copy">' + esc(blurb) + "</span>" +
-          '<span class="preview-link">View property ' + arrow + "</span>" +
+          '<span class="preview-link btn-glass">View property ' + arrow + "</span>" +
         "</span>" +
       "</a>"
     );
@@ -190,7 +189,28 @@
     return property.type === type;
   }
 
+  function fillFinderMenus() {
+    const hasSale = properties.some((property) => property.intent === "sale");
+    const uses = ["Residential", "Commercial", "Retail"].filter((type) => properties.some((property) => matchesUse(property, type)));
+    const markets = ["Maryland", "Virginia", "Washington, D.C."].filter((market) => properties.some((property) => property.state === market));
+    const options = (pairs) => pairs.map(([value, label]) => '<option value="' + esc(value) + '">' + esc(label) + "</option>").join("");
+    document.querySelectorAll("form.finder").forEach((form) => {
+      if (form.elements.intent) {
+        const intents = [["", "All"], ["rent", "For rent"]];
+        if (hasSale) intents.push(["sale", "For sale"]);
+        form.elements.intent.innerHTML = options(intents);
+      }
+      if (form.elements.type) {
+        form.elements.type.innerHTML = options([["", "All"]].concat(uses.map((type) => [type, type])));
+      }
+      if (form.elements.state) {
+        form.elements.state.innerHTML = options([["", "All markets"]].concat(markets.map((market) => [market, market])));
+      }
+    });
+  }
+
   function bindFinders(book) {
+    fillFinderMenus();
     document.querySelectorAll("form.finder").forEach((form) => {
       const params = new URLSearchParams(location.search);
       ["intent", "type", "state", "q"].forEach((name) => {
@@ -239,17 +259,19 @@
     const empty = document.getElementById("empty");
     const emptyCopy = empty ? empty.querySelector("p") : null;
     const params = new URLSearchParams(location.search);
+    let type = params.get("type") || "All";
+    if (type === "Office" || type === "Mixed-use") type = "Commercial";
     const state = {
       intent: params.get("intent") || "All",
       state: params.get("state") || "All",
       role: params.get("role") || "All",
-      type: params.get("type") || "All",
+      type,
       open: params.get("open") === "1",
       q: params.get("q") || "",
     };
-    const groups = [
-      ["role", "Ownership", [["All", "All"], ["Owned", "Owned"], ["Managed", "Managed"]]],
-    ];
+    const groups = properties.some((property) => property.role)
+      ? [["role", "Ownership", [["All", "All"], ["Owned", "Owned"], ["Managed", "Managed"]]]]
+      : [];
     filters.innerHTML = groups.map(([key, label, values]) =>
       '<div class="filter-row" role="group" aria-label="' + esc(label) + '">' +
         '<span class="filter-label">' + esc(label) + "</span>" +
@@ -262,14 +284,14 @@
 
     function describe() {
       const bits = [];
-      if (state.intent === "rent") bits.push("for rent");
       if (state.intent === "sale") bits.push("for sale");
       if (state.type !== "All") bits.push(state.type.toLowerCase());
       if (state.role !== "All") bits.push(state.role.toLowerCase());
-      if (state.state !== "All") bits.push("in " + state.state);
       if (state.open) bits.push("open now");
-      if (state.q) bits.push("matching “" + state.q + "”");
-      return bits.join(", ");
+      let text = bits.join(", ");
+      if (state.state !== "All") text = (text ? text + " in " : "in ") + state.state;
+      if (state.q) text = (text ? text + ", " : "") + "matching “" + state.q + "”";
+      return text;
     }
 
     function write() {
@@ -313,15 +335,18 @@
         return true;
       });
       const search = describe();
+      const clear = document.getElementById("clear-filters");
       if (count) {
+        const noun = list.length === 1 ? " property" : " properties";
         if (properties.length) {
           count.hidden = false;
-          count.textContent = list.length + (list.length === 1 ? " property" : " properties");
+          count.textContent = list.length + noun + (search ? " · " + search : "");
         } else {
           count.hidden = !search;
           count.textContent = search ? "Filtered to " + search + "." : "";
         }
       }
+      if (clear) clear.hidden = !search;
       book.innerHTML = list.map(leaseCard).join("");
       book.hidden = list.length === 0;
       if (empty) {
@@ -390,48 +415,49 @@
       return;
     }
     document.title = property.name + " — Drakca";
-    const facts = detailFacts(property);
     const story = Array.isArray(property.story) ? property.story : [];
     const gallery = (property.gallery || []).map((image) =>
       '<img src="' + esc(image.src) + '" alt="' + esc(image.alt) + '" loading="lazy">'
     ).join("");
     const applyHref = property.applyHref || ("contact.html?property=" + encodeURIComponent(property.name) + "&topic=apply");
-    const eyebrow = [property.state, property.neighborhood].filter(Boolean).join(" · ");
+    const tourHref = "contact.html?property=" + encodeURIComponent(property.name) + "&topic=tour";
+    const place = [property.neighborhood, property.state].filter(Boolean).join(", ");
+    const kind = property.intent === "sale" ? "For sale" : "For lease";
+    const chips = [kind, property.type, property.available ? "Available " + property.available : ""].filter(Boolean);
+    const stage = property.image || "images/hero.jpg";
+    const contact = DRAKA.contact || {};
     root.innerHTML =
-      '<section class="page-hero' + (property.image ? "" : " page-hero-plain") + '">' +
-        (property.image
-          ? '<img class="hero-media" src="' + esc(property.image) + '" alt="' + esc(property.alt || "") + '" style="object-position:' + esc(property.pos || "center") + '">'
-          : "") +
-        '<div class="hero-shade" aria-hidden="true"></div>' +
+      '<article class="listing" id="page">' +
         '<div class="wrap">' +
-          (eyebrow ? '<p class="eyebrow">' + esc(eyebrow) + "</p>" : "") +
-          "<h1>" + esc(property.name) + "</h1>" +
-          (property.summary ? '<p class="lede">' + esc(property.summary) + "</p>" : "") +
-        "</div>" +
-        '<a class="scroll-cue" href="#page"><span>Scroll</span><span class="scroll-line" aria-hidden="true"></span></a>' +
-      "</section>" +
-      '<section class="section" id="page"><div class="wrap property-intro">' +
-        (facts.length
-          ? "<dl class=\"facts\">" + facts.map(([label, value]) => "<div><dt>" + esc(label) + "</dt><dd>" + esc(value) + "</dd></div>").join("") + "</dl>"
-          : "") +
-        '<div class="story-grid">' +
-          '<div class="story">' +
-            story.map((paragraph) => "<p>" + esc(paragraph) + "</p>").join("") +
-            (gallery ? '<div class="gallery">' + gallery + "</div>" : "") +
+          '<p class="listing-back"><a class="btn-glass" href="properties.html">All properties</a></p>' +
+          '<figure class="listing-photo">' +
+            '<img src="' + esc(stage) + '" alt="' + esc(property.image ? (property.alt || "") : "") + '"' +
+              (property.pos ? ' style="object-position:' + esc(property.pos) + '"' : "") + ">" +
+            (property.image ? "" : '<span class="btn-glass listing-photo-note">Photos of this unit are not posted yet</span>') +
+          "</figure>" +
+          '<div class="listing-body">' +
+            '<div class="listing-copy">' +
+              (property.price ? '<p class="listing-price">' + esc(property.price) + "</p>" : "") +
+              "<h1>" + esc(property.name) + "</h1>" +
+              (place ? '<p class="listing-place">' + esc(place) + "</p>" : "") +
+              '<p class="listing-meta">' + chips.map((chip) => "<span>" + esc(chip) + "</span>").join("") + "</p>" +
+              '<div class="story">' + story.map((paragraph) => "<p>" + esc(paragraph) + "</p>").join("") + "</div>" +
+              (gallery ? '<div class="gallery">' + gallery + "</div>" : "") +
+            "</div>" +
+            '<aside class="listing-card">' +
+              '<p class="kicker">The office</p>' +
+              "<h2>See this property</h2>" +
+              "<p>Name this property when you write. The office replies at the email you send from.</p>" +
+              '<div class="listing-actions">' +
+                '<a class="btn-glass btn-glass-strong" href="' + esc(applyHref) + '">Apply</a>' +
+                '<a class="btn-glass" href="' + esc(tourHref) + '">Request a tour</a>' +
+                (contact.phoneHref ? '<a class="btn-glass btn-glass-plain" href="' + esc(contact.phoneHref) + '">' + esc(contact.phone) + "</a>" : "") +
+                (contact.emailHref ? '<a class="btn-glass btn-glass-plain" href="' + esc(contact.emailHref) + '">' + esc(contact.email) + "</a>" : "") +
+              "</div>" +
+            "</aside>" +
           "</div>" +
-          '<aside class="inquiry apply-panel">' +
-            '<p class="kicker">Application</p>' +
-            '<h2>How to apply</h2>' +
-            "<ol>" +
-              "<li>Review the details on this page.</li>" +
-              "<li>Send an application to the office and name this property.</li>" +
-              "<li>The office replies at the email you provide. Rent and terms are set in the lease.</li>" +
-            "</ol>" +
-            '<a class="btn btn-block" href="' + esc(applyHref) + '">Apply for this property</a>' +
-            '<p class="apply-note"><a href="contact.html?property=' + encodeURIComponent(property.name) + '&topic=tour">Request a tour</a> · <a href="properties.html">All properties</a></p>' +
-          "</aside>" +
         "</div>" +
-      "</div></section>";
+      "</article>";
   }
 
   function initForms() {
@@ -440,13 +466,17 @@
       const named = params.get("property") || params.get("building");
       const topic = params.get("topic");
       if (named && form.elements.subject && !form.elements.subject.value) form.elements.subject.value = named;
-      if (topic === "apply" && form.elements.who) form.elements.who.value = "Applying for a property";
-      if (topic === "availability" && form.elements.who) form.elements.who.value = "Looking for a home or a shop";
-      if (topic === "owner" && form.elements.who) form.elements.who.value = "An owner";
-      if (topic === "resident" && form.elements.who) form.elements.who.value = "A resident";
-      if (topic === "brokerage" && form.elements.who) form.elements.who.value = "Buying or selling";
-      if (topic === "estimate" && form.elements.who) form.elements.who.value = "Requesting an estimate";
-      if (topic === "tour" && form.elements.who) form.elements.who.value = "Scheduling a tour";
+      const slot = form.dataset.topic || "";
+      const topicFits = !slot || slot === topic || (slot === "maintenance" && topic === "resident");
+      if (topic && form.elements.who && topicFits) {
+        if (topic === "apply") form.elements.who.value = "Applying for a property";
+        if (topic === "availability") form.elements.who.value = "Looking for a home or a shop";
+        if (topic === "owner") form.elements.who.value = "An owner";
+        if (topic === "resident" && slot !== "maintenance") form.elements.who.value = "A resident";
+        if (topic === "brokerage") form.elements.who.value = "Buying or selling";
+        if (topic === "estimate") form.elements.who.value = "Requesting an estimate";
+        if (topic === "tour") form.elements.who.value = "Scheduling a tour";
+      }
 
       form.addEventListener("submit", (event) => {
         event.preventDefault();

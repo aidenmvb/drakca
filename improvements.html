@@ -4,13 +4,13 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Improvements and repairs — Drakca</title>
-  <meta name="description" content="Improvements and repairs for homes, businesses, and rental properties. Drakca quotes the work separately from rent.">
+  <meta name="description" content="Request an estimate or send a maintenance note. Drakca quotes the work separately from rent.">
   <meta name="theme-color" content="#142028">
   <link rel="icon" href="favicon.svg" type="image/svg+xml">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700&family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/styles.css?v=8">
+  <link rel="stylesheet" href="css/styles.css?v=14">
 </head>
 <body data-page="improvements">
   <a class="skip" href="#main">Skip to content</a>
@@ -22,8 +22,6 @@
         <a href="properties.html" data-nav="properties">Properties</a>
         <a href="improvements.html" data-nav="improvements">Repairs</a>
         <a href="services.html" data-nav="services">Services</a>
-        <a href="residents.html" data-nav="residents">Residents</a>
-        <a href="owners.html" data-nav="owners">Owners</a>
         <a href="about.html" data-nav="about">About</a>
         <a href="contact.html" data-nav="contact">Contact</a>
         <a class="btn nav-inquire" href="contact.html">Inquire</a>
@@ -37,7 +35,11 @@
       <div class="wrap">
         <p class="eyebrow">Improvements and repairs</p>
         <h1>The work, quoted on its own.</h1>
-        <p class="lede">Residential, commercial, and repairs at rental properties. Rent stays on the lease. This page is for the work.</p>
+        <p class="lede">An estimate for work on a home, a business, or a rental. A maintenance note if something in a unit needs attention. Rent stays on the lease.</p>
+        <p class="hero-actions">
+          <a class="btn" href="#estimate">Request an estimate</a>
+          <a class="btn-glass" href="#maintenance">Maintenance request</a>
+        </p>
       </div>
       <a class="scroll-cue" href="#estimate">
         <span>Estimate</span>
@@ -75,7 +77,7 @@
             <p class="lede">Name the property and the work. The office replies at the email you give, and you can also call <a data-phone href=""></a>.</p>
           </div>
           <div>
-            <form class="desk-form form" novalidate>
+            <form class="desk-form form" data-topic="estimate" novalidate>
               <input type="hidden" name="who" value="Requesting an estimate">
               <div class="form-row">
                 <div class="field"><label for="name">Name</label><input id="name" name="name" autocomplete="name" required></div>
@@ -107,12 +109,46 @@
         </div>
       </div>
     </section>
+    <section class="section page-band" id="maintenance">
+      <div class="wrap">
+        <div class="callout">If you are in danger, or a building emergency threatens people, call 911 before you call the office.</div>
+        <div class="contact-grid">
+          <div>
+            <p class="eyebrow">In a unit</p>
+            <h2>Send a maintenance note.</h2>
+            <p class="lede">For something that can wait until the next business day. Name the building, the unit if you have it, and what needs attention.</p>
+            <p class="repair-aside">No heat, no water, no power, or a door that will not lock: call <a data-phone href=""></a>. This note is not a rent payment, and it is not a quote.</p>
+          </div>
+          <div>
+            <form class="desk-form form" data-topic="maintenance" novalidate>
+              <input type="hidden" name="who" value="A maintenance request">
+              <div class="form-row">
+                <div class="field"><label for="maint-name">Name</label><input id="maint-name" name="name" autocomplete="name" required></div>
+                <div class="field"><label for="maint-email">Email</label><input id="maint-email" name="email" type="email" autocomplete="email" required></div>
+              </div>
+              <div class="form-row">
+                <div class="field"><label for="maint-phone">Phone</label><input id="maint-phone" name="phone" type="tel" autocomplete="tel"></div>
+                <div class="field"><label for="maint-subject">Property and unit</label><input id="maint-subject" name="subject" required></div>
+              </div>
+              <div class="field"><label for="maint-message">What needs attention</label><textarea id="maint-message" name="message" required></textarea></div>
+              <button class="btn" type="submit">Send the request</button>
+            </form>
+            <div class="form-success" hidden tabindex="-1">
+              <p class="eyebrow">Ready to send</p>
+              <h2>Your email should open.</h2>
+              <p>The request is addressed to the office. Send it from your email program. Nothing is delivered until you send that message. If this is urgent — water, heat, power, or a lock — call <a data-phone href=""></a> now.</p>
+              <p style="margin-top:1rem"><a class="btn" data-mailto href="mailto:drakaLLC@gmail.com">Email the office</a></p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
   </main>
   <footer class="site-footer">
     <div class="wrap foot-grid">
       <div><p class="brand-name">Drakca</p><p>The public name for DL Management, a brokerage based in Bethesda, Maryland.</p></div>
       <div><p class="foot-label">Portfolio</p><a href="properties.html?intent=rent">For lease</a><a href="properties.html">Properties</a></div>
-      <div><p class="foot-label">Company</p><a href="improvements.html">Repairs</a><a href="services.html">Services</a><a href="residents.html">Residents</a><a href="owners.html">Owners</a><a href="about.html">About</a><a href="contact.html">Contact</a></div>
+      <div><p class="foot-label">Company</p><a href="improvements.html">Repairs</a><a href="improvements.html#maintenance">Maintenance</a><a href="services.html">Services</a><a href="about.html">About</a><a href="contact.html">Contact</a></div>
       <div><p class="foot-label">Offices</p><p>Bethesda, Maryland</p><p><a data-phone href=""></a></p><p><a data-email href=""></a></p></div>
     </div>
     <div class="wrap legal"><span>Equal Housing Opportunity</span><span>© <span id="year">2026</span> Drakca</span></div>

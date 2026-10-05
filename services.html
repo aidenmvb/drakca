@@ -4,13 +4,13 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Services — Drakca</title>
-  <meta name="description" content="Property management, leasing, maintenance, accounting, and brokerage across the DMV.">
+  <meta name="description" content="Brokerage across Maryland, Virginia, and Washington, D.C., and a place for owners to start a walk-through.">
   <meta name="theme-color" content="#142028">
   <link rel="icon" href="favicon.svg" type="image/svg+xml">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700&family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/styles.css?v=8">
+  <link rel="stylesheet" href="css/styles.css?v=14">
 </head>
 <body data-page="services">
   <a class="skip" href="#main">Skip to content</a>
@@ -22,8 +22,6 @@
         <a href="properties.html" data-nav="properties">Properties</a>
         <a href="improvements.html" data-nav="improvements">Repairs</a>
         <a href="services.html" data-nav="services">Services</a>
-        <a href="residents.html" data-nav="residents">Residents</a>
-        <a href="owners.html" data-nav="owners">Owners</a>
         <a href="about.html" data-nav="about">About</a>
         <a href="contact.html" data-nav="contact">Contact</a>
         <a class="btn nav-inquire" href="contact.html">Inquire</a>
@@ -38,6 +36,9 @@
         <p class="eyebrow">Services</p>
         <h1>Brokerage across the DMV.</h1>
         <p class="lede">DL Management buys, sells, and works with investment property. The office is in Bethesda. The territory is Maryland, Virginia, and Washington, D.C.</p>
+        <p class="hero-actions">
+          <a class="btn-glass" href="#owners">For owners</a>
+        </p>
       </div>
       <a class="scroll-cue" href="#page">
         <span>Scroll</span>
@@ -57,7 +58,84 @@
         <div class="callout" style="margin-top:1.2rem">
           <p>Improvements and repairs for homes, businesses, and rental properties are quoted separately from rent. <a href="improvements.html#estimate">Request an estimate</a>.</p>
         </div>
-        <p class="page-action"><a class="btn" href="contact.html?topic=owner">Discuss a building</a></p>
+        <p class="page-action"><a class="btn" href="#owners">For owners</a></p>
+      </div>
+    </section>
+    <section class="section page-band" id="owners">
+      <div class="wrap">
+        <div class="section-head">
+          <p class="eyebrow">Owners</p>
+          <h2>Owner representation.</h2>
+          <p class="lede">For owners of houses, apartments, and mixed-use property in Maryland, Virginia, and the District of Columbia.</p>
+        </div>
+        <div class="steps">
+          <article class="step"><p class="num">01</p><h3>A conversation</h3><p>Tell us the address, how it is occupied, and what you want handled. No retainer for the first meeting.</p></article>
+          <article class="step"><p class="num">02</p><h3>A walk-through</h3><p>We see the building before we quote. Rent, condition, and the local rules are not guessed from a listing photo.</p></article>
+          <article class="step"><p class="num">03</p><h3>A written scope</h3><p>Leasing, maintenance, accounting, and reporting, spelled out. Fee follows the building, not a published percentage that ignores it.</p></article>
+        </div>
+        <div class="split" style="margin-top:1.2rem">
+          <article class="info-card">
+            <h3>What we take</h3>
+            <ul class="list">
+              <li>Leasing and renewals</li>
+              <li>Maintenance and capital planning</li>
+              <li>Rent, payables, and monthly statements</li>
+              <li>Resident communication</li>
+              <li>Sale of the building when you are ready</li>
+            </ul>
+          </article>
+          <article class="info-card">
+            <h3>Terms of engagement</h3>
+            <ul class="list">
+              <li>No occupancy guarantee is offered in advance</li>
+              <li>Rent opinions follow an inspection of the property</li>
+              <li>Assignments are limited to Maryland, Virginia, and the District</li>
+              <li>The work is handled locally, from Bethesda</li>
+            </ul>
+          </article>
+        </div>
+        <div class="contact-grid" id="owner-start" style="margin-top:1.8rem">
+          <div>
+            <p class="eyebrow">Start</p>
+            <h2>Tell us about the property.</h2>
+            <p class="lede">Address, roughly how many residences or how much area, and whether you want management, a sale, or both.</p>
+          </div>
+          <div>
+            <form class="desk-form form" data-topic="owner" novalidate>
+              <input type="hidden" name="who" value="An owner">
+              <div class="form-row">
+                <div class="field"><label for="owner-name">Name</label><input id="owner-name" name="name" autocomplete="name" required></div>
+                <div class="field"><label for="owner-email">Email</label><input id="owner-email" name="email" type="email" autocomplete="email" required></div>
+              </div>
+              <div class="form-row">
+                <div class="field"><label for="owner-phone">Phone</label><input id="owner-phone" name="phone" type="tel" autocomplete="tel"></div>
+                <div class="field"><label for="owner-subject">Address or neighborhood</label><input id="owner-subject" name="subject"></div>
+              </div>
+              <div class="field"><label for="owner-message">The building</label><textarea id="owner-message" name="message" required></textarea></div>
+              <button class="btn" type="submit">Request a walk-through</button>
+            </form>
+            <div class="form-success" hidden tabindex="-1">
+              <p class="eyebrow">Ready to send</p>
+              <h2>Thank you.</h2>
+              <p>The note is addressed to the office. Send it from your email program, and the office will reply to schedule a time to see the building.</p>
+              <p style="margin-top:1rem"><a class="btn" data-mailto href="mailto:drakaLLC@gmail.com">Email the office</a></p>
+            </div>
+          </div>
+        </div>
+        <div class="faq" style="margin-top:2.5rem">
+          <details>
+            <summary>Which buildings do you take?</summary>
+            <p>Apartment houses, small mixed-use buildings, retail rows, modest office, and the occasional single house. We work in the District of Columbia, suburban Maryland, and Northern Virginia. We do not take scattered condominiums across the country.</p>
+          </details>
+          <details>
+            <summary>What does management cost?</summary>
+            <p>It depends on the building: size, age of the systems, and whether it is occupied. We quote after the walk-through. We do not publish a rate that ignores the property.</p>
+          </details>
+          <details>
+            <summary>Can you also sell it?</summary>
+            <p>Yes. Brokerage sits with management. If you want a sale, we say so in the scope. We represent buildings we know, including ones we already manage.</p>
+          </details>
+        </div>
       </div>
     </section>
   </main>
@@ -65,7 +143,7 @@
     <div class="wrap foot-grid">
       <div><p class="brand-name">Drakca</p><p>The public name for DL Management, a brokerage based in Bethesda, Maryland.</p></div>
       <div><p class="foot-label">Portfolio</p><a href="properties.html">Properties</a><a href="properties.html?state=Maryland">Maryland</a><a href="properties.html?state=Virginia">Virginia</a></div>
-      <div><p class="foot-label">Company</p><a href="improvements.html">Repairs</a><a href="residents.html">Residents</a><a href="owners.html">Owners</a><a href="about.html">About</a><a href="contact.html">Contact</a></div>
+      <div><p class="foot-label">Company</p><a href="improvements.html">Repairs</a><a href="services.html#owners">For owners</a><a href="about.html">About</a><a href="contact.html">Contact</a></div>
       <div><p class="foot-label">Offices</p><p>Bethesda, Maryland</p><p><a data-phone href=""></a></p><p><a data-email href=""></a></p></div>
     </div>
     <div class="wrap legal"><span>Equal Housing Opportunity</span><span>© <span id="year">2026</span> Drakca</span></div>

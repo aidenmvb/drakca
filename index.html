@@ -10,7 +10,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700&family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/styles.css?v=8">
+  <link rel="stylesheet" href="css/styles.css?v=14">
 </head>
 <body data-page="home">
   <a class="skip" href="#main">Skip to content</a>
@@ -25,8 +25,6 @@
         <a href="properties.html" data-nav="properties">Properties</a>
         <a href="improvements.html" data-nav="improvements">Repairs</a>
         <a href="services.html" data-nav="services">Services</a>
-        <a href="residents.html" data-nav="residents">Residents</a>
-        <a href="owners.html" data-nav="owners">Owners</a>
         <a href="about.html" data-nav="about">About</a>
         <a href="contact.html" data-nav="contact">Contact</a>
         <a class="btn nav-inquire" href="contact.html">Inquire</a>
@@ -44,7 +42,7 @@
         <p class="lede">Drakca is the public name of DL Management, a brokerage in Bethesda. The office lists vacancies and arranges improvements and repairs.</p>
         <p class="hero-actions">
           <a class="btn" href="#lease">Available for lease</a>
-          <a class="btn-text" href="improvements.html#estimate">Request an estimate</a>
+          <a class="btn-glass" href="improvements.html#estimate">Request an estimate</a>
         </p>
         <form class="finder" action="properties.html#page" method="get">
           <label>
@@ -52,7 +50,6 @@
             <select name="intent">
               <option value="">All</option>
               <option value="rent">For rent</option>
-              <option value="sale">For sale</option>
             </select>
           </label>
           <label>
@@ -61,8 +58,6 @@
               <option value="">All</option>
               <option value="Residential">Residential</option>
               <option value="Commercial">Commercial</option>
-              <option value="Mixed-use">Mixed-use</option>
-              <option value="Office">Office</option>
               <option value="Retail">Retail</option>
             </select>
           </label>
@@ -92,7 +87,7 @@
         <div class="lease-intro">
           <p class="eyebrow">Available for lease</p>
           <p class="lease-note">Three from the office list. Rent is shown when the office has confirmed it.</p>
-          <a class="lease-all" id="lease-all" href="properties.html?intent=rent#page">View all <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+          <a class="lease-all btn-glass" id="lease-all" href="properties.html?intent=rent#page">View all <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
         </div>
         <div class="lease-row" id="lease-preview"></div>
         <p id="lease-empty" class="empty" hidden>Nothing is listed for lease yet. Call the office to ask what is coming open.</p>
@@ -107,7 +102,10 @@
             <h2>Work on the building, quoted on its own.</h2>
             <p class="lede">Homes, businesses, and repairs at rental properties. The estimate covers the work. Rent is paid only as rent, under the lease.</p>
           </div>
-          <a class="btn" href="improvements.html#estimate">Request an estimate</a>
+          <div class="hero-actions">
+            <a class="btn" href="improvements.html#estimate">Request an estimate</a>
+            <a class="btn-line" href="improvements.html#maintenance">Maintenance request</a>
+          </div>
         </div>
         <div class="steps">
           <article class="step">
@@ -141,19 +139,19 @@
             <p class="kicker">Headquarters</p>
             <h3>Maryland</h3>
             <p>The office is in Bethesda, with work across the state.</p>
-            <span class="btn-text">View Maryland</span>
+            <span class="btn-glass">View Maryland</span>
           </a>
           <a class="market" href="properties.html?state=Virginia#page">
             <p class="kicker">Northern Virginia</p>
             <h3>Virginia</h3>
             <p>Leasing and representation in Northern Virginia.</p>
-            <span class="btn-text">View Virginia</span>
+            <span class="btn-glass">View Virginia</span>
           </a>
           <a class="market" href="properties.html?state=Washington%2C%20D.C.#page">
             <p class="kicker">The District</p>
             <h3>Washington, D.C.</h3>
             <p>Leasing and representation in the District.</p>
-            <span class="btn-text">View the District</span>
+            <span class="btn-glass">View the District</span>
           </a>
         </div>
       </div>
@@ -187,8 +185,8 @@
         <h2>Representation on both sides of the Potomac.</h2>
         <p>Assignments begin with a consultation at the Bethesda office.</p>
         <div class="hero-actions">
-          <a class="btn" href="owners.html">For owners</a>
-          <a class="btn-text" href="contact.html?topic=owner">Discuss a property</a>
+          <a class="btn" href="services.html#owners">For owners</a>
+          <a class="btn-glass" href="services.html#owner-start">Discuss a property</a>
         </div>
       </div>
     </section>
@@ -199,7 +197,7 @@
       <div class="wrap close-copy">
         <p class="eyebrow">The office</p>
         <h2>Call or write.</h2>
-        <p>Vacancies, repairs, owners, and residents. Name the property if you have one.</p>
+        <p>Vacancies, repairs, and owners. Name the property if you have one.</p>
         <p class="contact-line">
           <a data-phone href=""></a>
           <a data-email href=""></a>
@@ -225,8 +223,6 @@
         <a href="properties.html?intent=rent">For lease</a>
         <a href="improvements.html">Repairs</a>
         <a href="services.html">Services</a>
-        <a href="residents.html">Residents</a>
-        <a href="owners.html">Owners</a>
         <a href="about.html">About</a>
         <a href="contact.html">Contact</a>
       </div>

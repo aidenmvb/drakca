@@ -2,115 +2,12 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Residents — Drakca</title>
-  <meta name="description" content="Maintenance, rent, and after-hours contact for residents of Drakca buildings in the DMV.">
-  <meta name="theme-color" content="#142028">
-  <link rel="icon" href="favicon.svg" type="image/svg+xml">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700&family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/styles.css?v=8">
+  <meta http-equiv="refresh" content="0; url=improvements.html#maintenance">
+  <link rel="canonical" href="improvements.html#maintenance">
+  <title>Maintenance — Drakca</title>
+  <script>location.replace("improvements.html#maintenance");</script>
 </head>
-<body data-page="residents">
-  <a class="skip" href="#main">Skip to content</a>
-  <header class="site-header" id="header">
-    <div class="wrap header-inner">
-      <a class="brand" href="index.html"><span class="brand-mark" aria-hidden="true">D</span><span class="brand-type"><span class="brand-name">Drakca</span><span class="brand-sub">DL Management</span></span></a>
-      <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="nav-panel">Menu</button>
-      <nav class="nav-panel" id="nav-panel" aria-label="Primary">
-        <a href="properties.html" data-nav="properties">Properties</a>
-        <a href="improvements.html" data-nav="improvements">Repairs</a>
-        <a href="services.html" data-nav="services">Services</a>
-        <a href="residents.html" data-nav="residents">Residents</a>
-        <a href="owners.html" data-nav="owners">Owners</a>
-        <a href="about.html" data-nav="about">About</a>
-        <a href="contact.html" data-nav="contact">Contact</a>
-        <a class="btn nav-inquire" href="contact.html">Inquire</a>
-      </nav>
-    </div>
-  </header>
-  <main id="main">
-    <section class="page-hero">
-      <img class="hero-media" src="images/king.jpg" alt="">
-      <div class="hero-shade" aria-hidden="true"></div>
-      <div class="wrap">
-        <p class="eyebrow">Residents</p>
-        <h1>If you live in one of the properties.</h1>
-        <p class="lede">Name the building and what happened. The same office covers Washington, Maryland, and Virginia.</p>
-      </div>
-      <a class="scroll-cue" href="#page">
-        <span>Scroll</span>
-        <span class="scroll-line" aria-hidden="true"></span>
-      </a>
-    </section>
-    <section class="section" id="page">
-      <div class="wrap">
-        <div class="callout" style="margin-bottom:1.2rem">If you are in danger, or a building emergency threatens people, call 911 before you call us.</div>
-        <div class="split">
-          <article class="info-card">
-            <p class="num">Repairs</p>
-            <h3>Maintenance</h3>
-            <p>Use the form for anything that can wait until the next business day. Include the building and a way to reach you.</p>
-          </article>
-          <article class="info-card">
-            <p class="num">Rent</p>
-            <h3>Payments</h3>
-            <p>Rent is paid the way your lease describes. Questions about a charge come here, with the building named. We do not route residents through a national payment app.</p>
-          </article>
-          <article class="info-card">
-            <p class="num">After hours</p>
-            <h3>What cannot wait</h3>
-            <p>No heat, no water, no power, or a door that will not lock: call <a data-phone href=""></a>. The same number serves every building in the portfolio.</p>
-          </article>
-          <article class="info-card">
-            <p class="num">Looking</p>
-            <h3>A home for lease</h3>
-            <p>Current listings are on the properties page. Pets, parking, and utilities are set in the lease for that address, not by a company-wide rule.</p>
-            <p style="margin-top:1rem"><a class="btn-line" href="properties.html?intent=rent#page">See what is for lease</a></p>
-          </article>
-        </div>
-        <div class="contact-grid" style="margin-top:1.6rem">
-          <div>
-            <p class="eyebrow">Request</p>
-            <h2 style="font-size:2.4rem;margin:.4rem 0 .6rem">Send a maintenance note.</h2>
-            <p class="lede">Tell us the building, the unit if you have it, and what needs attention.</p>
-          </div>
-          <div>
-            <form class="desk-form form" id="desk-form" novalidate>
-              <input type="hidden" name="who" value="A resident">
-              <div class="form-row">
-                <div class="field"><label for="name">Name</label><input id="name" name="name" autocomplete="name" required></div>
-                <div class="field"><label for="email">Email</label><input id="email" name="email" type="email" autocomplete="email" required></div>
-              </div>
-              <div class="form-row">
-                <div class="field"><label for="phone">Phone</label><input id="phone" name="phone" type="tel" autocomplete="tel"></div>
-                <div class="field"><label for="subject">Property and unit</label><input id="subject" name="subject" required></div>
-              </div>
-              <div class="field"><label for="message">What needs attention</label><textarea id="message" name="message" required></textarea></div>
-              <button class="btn" type="submit">Send the request</button>
-            </form>
-            <div class="form-success" hidden tabindex="-1">
-              <p class="eyebrow">Ready to send</p>
-              <h2>Thank you.</h2>
-              <p>The request is addressed to the office. Send it from your email program. If this is urgent — water, heat, power, or a lock — call <a data-phone href=""></a> now.</p>
-              <p style="margin-top:1rem"><a class="btn" data-mailto href="mailto:drakaLLC@gmail.com">Email the office</a></p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-  </main>
-  <footer class="site-footer">
-    <div class="wrap foot-grid">
-      <div><p class="brand-name">Drakca</p><p>The public name for DL Management, a brokerage based in Bethesda, Maryland.</p></div>
-      <div><p class="foot-label">Portfolio</p><a href="properties.html">Properties</a><a href="properties.html?open=1">Open now</a></div>
-      <div><p class="foot-label">Company</p><a href="improvements.html">Repairs</a><a href="services.html">Services</a><a href="owners.html">Owners</a><a href="about.html">About</a><a href="contact.html">Contact</a></div>
-      <div><p class="foot-label">Offices</p><p>Bethesda, Maryland</p><p><a data-phone href=""></a></p><p><a data-email href=""></a></p></div>
-    </div>
-    <div class="wrap legal"><span>Equal Housing Opportunity</span><span>© <span id="year">2026</span> Drakca</span></div>
-  </footer>
-  <script src="js/data.js"></script>
-  <script src="js/site.js"></script>
+<body>
+  <p><a href="improvements.html#maintenance">Maintenance request</a></p>
 </body>
 </html>
